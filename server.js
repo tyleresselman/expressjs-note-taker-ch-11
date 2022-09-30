@@ -1,5 +1,5 @@
 const express = require('express');
-const fs = require('fs');
+// const fs = require('fs');
 const path = require('path');
 const { readFromFile, readAndAppend } = require('./helpers/fsUtils');
 
@@ -37,15 +37,14 @@ app.post('/api/notes', (req, res) => {
 
 
         // Write the string to a file
-        readAndAppend(`./db/db.json`, newNote => {
+        readAndAppend(newNote, `./db/db.json`)
             const response = {
                 status: 'success',
                 body: newNote,
             };
 
             res.json(response);
-        })
-    };
+        };
 
 })
 
