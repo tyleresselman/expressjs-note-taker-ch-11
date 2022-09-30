@@ -1,5 +1,5 @@
 const express = require('express');
-// const fs = require('fs');
+const fs = require('fs');
 const path = require('path');
 const { readFromFile, readAndAppend } = require('./helpers/fsUtils');
 
@@ -25,7 +25,7 @@ app.get('/api/notes', (req, res) => {
     readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)))
 });
 
-app.post('./api/notes', (req, res) => {
+app.post('/api/notes', (req, res) => {
     const { title, text } = req.body;
 
     if (title && text) {
@@ -38,18 +38,20 @@ app.post('./api/notes', (req, res) => {
 
         // Write the string to a file
         readAndAppend(`./db/db.json`, newNote => {
-         const response = {
-            status: 'success',
-            body: newNote,
-        };
+            const response = {
+                status: 'success',
+                body: newNote,
+            };
 
-        res.json(response);
-    })
+            res.json(response);
+        })
     };
 
-
-
-    app.listen(PORT, () =>
-        console.log(`App listening at http://localhost:${PORT}`)
-    );
 })
+
+
+
+app.listen(PORT, () =>
+    console.log(`App listening at http://localhost:${PORT}`)
+);
+
