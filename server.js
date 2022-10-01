@@ -1,7 +1,8 @@
+// const { notStrictEqual } = require('assert');
 const express = require('express');
-// const fs = require('fs');
 const path = require('path');
 const { readFromFile, readAndAppend } = require('./helpers/fsUtils');
+const { v4: uuidv4 } = require('uuid');
 
 
 const PORT = process.env.PORT || 3001;
@@ -13,30 +14,37 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
 
-app.get('/notes', (req, res) =>
-    res.sendFile(path.join(__dirname, '/public/notes.html'))
-);
 
+// Route to landing page
 app.get('/', (req, res) =>
     res.sendFile(path.join(__dirname, '/public/index.html'))
 );
 
+// Route to notes page
+app.get('/notes', (req, res) =>
+    res.sendFile(path.join(__dirname, '/public/notes.html'))
+);
+
+// Route to retrieve notes
 app.get('/api/notes', (req, res) => {
-    readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)))
+    readFromFile('./db/db.json')
+    .then((data) => res.json(JSON.parse(data)))
 });
 
+// Route to save notes
 app.post('/api/notes', (req, res) => {
     const { title, text } = req.body;
 
     if (title && text) {
-        // Variable for the object we will save
+        // Variable for the new note to be saved
         const newNote = {
             title,
             text,
+            id: uuidv4()
         };
 
 
-        // Write the string to a file
+        // Append the new note to our db.json
         readAndAppend(newNote, `./db/db.json`)
             const response = {
                 status: 'success',
@@ -46,7 +54,15 @@ app.post('/api/notes', (req, res) => {
             res.json(response);
         };
 
-})
+});
+
+
+// The beginning of my delete route
+// app.delete('/api/notes/:id', (req, res) => {
+//     const selectedId = JSON.parse(req.params.id);
+//     readFromFile('./db/db.json')
+//     .then((data) => res.json(JSON.parse(data)));
+// })
 
 
 
