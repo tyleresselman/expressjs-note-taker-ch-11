@@ -1,4 +1,3 @@
-// const { notStrictEqual } = require('assert');
 const express = require('express');
 const path = require('path');
 const { readFromFile, readAndAppend } = require('./helpers/fsUtils');
