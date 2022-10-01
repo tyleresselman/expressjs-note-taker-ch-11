@@ -24,7 +24,7 @@
   Launch the app from its heroku address (https://evening-wildwood-12321.herokuapp.com/) or at the LIVE LINK above. Then simply enter the notes page and save your note from there.
 
   ## Contributions
-  I collaborated on the logic and various bug fixes with classmates Leah Roman, Jared Johnson, Joseph Ruiz, and Jordan Harris. 
+  I collaborated on the logic and various bug fixes with classmates Leah Roman, Jared Johnson, Joseph Ruiz, Rob Thompson, and Jordan Harris. 
 
   ## Questions
   Feel free to check out my GitHub page at: 
